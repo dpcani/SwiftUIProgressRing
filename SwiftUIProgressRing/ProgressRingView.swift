@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct ProgressRingView: View {
     @Binding var progress: Double
     
@@ -14,11 +16,12 @@ struct ProgressRingView: View {
     var width: CGFloat = 250.0
     var gradient = Gradient(colors: [.darkPurple, .lightYellow])
     var startAngle = -90.0
+    var textColor = Color.primary
     
     private var radius: Double {
         Double(width / 2)
     }
-    
+   
     private var ringTipShadowOffset: CGPoint {
         let shadowPosition = ringTipPosition(progress: progress + 0.01)
         let circlePosition = ringTipPosition(progress: progress)
@@ -33,6 +36,7 @@ struct ProgressRingView: View {
             
             RingShape(progress: progress, thickness: thickness)
                 .fill(AngularGradient(gradient: gradient, center: .center, startAngle: .degrees(startAngle), endAngle: .degrees(360 * progress + startAngle)))
+                .animatableProgressText(progress: progress, textColor: textColor)
             
             RingTip(progress: progress, startAngle: startAngle, ringRadius: radius)
                 .frame(width: thickness, height: thickness)
@@ -49,25 +53,14 @@ struct ProgressRingView: View {
         
         return CGPoint(x: radius * cos(angleInRadian), y: radius * sin(angleInRadian))
     }
-}
-
-struct ProgressRingView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressRingView(progress: .constant(0.5))
-            .previewDisplayName("ProgressRingView (50%)")
-        ProgressRingView(progress: .constant(0.9))
-            .previewDisplayName("ProgressRingView (90%)")
-        ProgressRingView(progress: .constant(1.0))
-            .previewDisplayName("ProgressRingView (100%)")
-    }
+    
 }
 
 struct RingShape: Shape {
     var progress: Double = 0.0
     var thickness: CGFloat = 30.0
-
     var startAngle: Double = -90.0
-    
+
     var animatableData: Double {
         get { progress }
         set { progress = newValue }
@@ -117,4 +110,61 @@ struct RingTip: Shape {
         return path
     }
 
+}
+
+struct ProgressTextModifier: AnimatableModifier {
+    
+    var progress: Double = 0.0
+    var textColor: Color = .primary
+    
+    private var progressText: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.percentSymbol = "%"
+        
+        return formatter.string(from: NSNumber(value: progress)) ?? ""
+    }
+    
+    var animatableData: Double {
+        get { progress }
+        set { progress = newValue }
+    }
+    
+    func body(content: Content) -> some View {
+        
+        content
+            .overlay(
+                Text(progressText)
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.bold)
+                    .foregroundColor(textColor)
+                    .animation(nil)
+            )
+    }
+}
+
+struct ProgressRingView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProgressRingView(progress: .constant(0.5)).previewLayout(.fixed(width: 300, height: 300))
+        ProgressRingView(progress: .constant(0.9)).previewLayout(.fixed(width: 300, height: 300))
+    }
+}
+
+extension View {
+    func animatableProgressText(progress: Double, textColor: Color = Color.primary) -> some View {
+        self.modifier(ProgressTextModifier(progress: progress, textColor: textColor))
+    }
+}
+
+struct ProgressBar_Library: LibraryContentProvider {
+    @LibraryContentBuilder var views: [LibraryItem] {
+        LibraryItem(ProgressRingView(progress: .constant(1.0), thickness: 12.0, width: 130.0, gradient: Gradient(colors: [.darkYellow, .lightYellow])), title: "Progress Ring", category: .control)
+        
+        LibraryItem(ProgressRingView(progress: .constant(1.0), thickness: 30.0, width: 250.0, gradient: Gradient(colors: [.darkPurple, .lightYellow])), title: "Progress Ring - Bigger", category: .control)
+    }
+    
+    @LibraryContentBuilder
+    func modifiers(base: Circle) -> [LibraryItem] {
+        LibraryItem(base.animatableProgressText(progress: 1.0), title: "Progress Indicator", category: .control)
+    }
 }

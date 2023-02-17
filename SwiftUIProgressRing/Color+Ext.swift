@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 extension Color {
     
     public init(red: Int, green: Int, blue: Int, opacity: Double = 1.0) {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B95FB03299F4ECA00378986 /* TaskGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B95FB02299F4ECA00378986 /* TaskGridView.swift */; };
+		0B95FB04299F4F6300378986 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B95FB00299F4E7400378986 /* Task.swift */; };
+		0B95FB05299F4F6600378986 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B95FB01299F4E7400378986 /* TaskStore.swift */; };
 		F4E1006528A6144800375E20 /* SwiftUIProgressRingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1006428A6144800375E20 /* SwiftUIProgressRingApp.swift */; };
 		F4E1006728A6144800375E20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1006628A6144800375E20 /* ContentView.swift */; };
 		F4E1006928A6144900375E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E1006828A6144900375E20 /* Assets.xcassets */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B95FB00299F4E7400378986 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		0B95FB01299F4E7400378986 /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
+		0B95FB02299F4ECA00378986 /* TaskGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGridView.swift; sourceTree = "<group>"; };
 		F4E1006128A6144800375E20 /* SwiftUIProgressRing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIProgressRing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E1006428A6144800375E20 /* SwiftUIProgressRingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIProgressRingApp.swift; sourceTree = "<group>"; };
 		F4E1006628A6144800375E20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +42,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B95FAFF299F4E7400378986 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B95FB00299F4E7400378986 /* Task.swift */,
+				0B95FB01299F4E7400378986 /* TaskStore.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F4E1005828A6144800375E20 = {
 			isa = PBXGroup;
 			children = (
@@ -55,12 +70,14 @@
 		F4E1006328A6144800375E20 /* SwiftUIProgressRing */ = {
 			isa = PBXGroup;
 			children = (
+				0B95FAFF299F4E7400378986 /* Model */,
 				F4E1006428A6144800375E20 /* SwiftUIProgressRingApp.swift */,
 				F4E1006628A6144800375E20 /* ContentView.swift */,
 				F4E1006828A6144900375E20 /* Assets.xcassets */,
 				F4E1006A28A6144900375E20 /* Preview Content */,
 				F4E1007228A6152600375E20 /* ProgressRingView.swift */,
 				F4E1007428A61BCE00375E20 /* Color+Ext.swift */,
+				0B95FB02299F4ECA00378986 /* TaskGridView.swift */,
 			);
 			path = SwiftUIProgressRing;
 			sourceTree = "<group>";
@@ -144,9 +161,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E1006728A6144800375E20 /* ContentView.swift in Sources */,
+				0B95FB03299F4ECA00378986 /* TaskGridView.swift in Sources */,
 				F4E1007528A61BCE00375E20 /* Color+Ext.swift in Sources */,
 				F4E1006528A6144800375E20 /* SwiftUIProgressRingApp.swift in Sources */,
+				0B95FB04299F4F6300378986 /* Task.swift in Sources */,
 				F4E1007328A6152600375E20 /* ProgressRingView.swift in Sources */,
+				0B95FB05299F4F6600378986 /* TaskStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
